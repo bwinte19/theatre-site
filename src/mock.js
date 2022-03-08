@@ -1,6 +1,6 @@
 let imgWidth = 250;
 let imgHeight = 300;
-let baconIpsum = "Bacon ipsum dolor amet tenderloin buffalo leberkas capicola, biltong short loin prosciutto bacon beef pork loin shankle venison. Tri-tip boudin pork chop shank spare ribs prosciutto, porchetta frankfurter bresaola rump fatback. Salami ground round turducken ball tip t-bone alcatra ham venison short loin chicken boudin drumstick picanha tenderloin pork. Shank jowl buffalo turkey, ribeye brisket shoulder chislic pig porchetta ball tip pork chop bresaola frankfurter ham hock.";
+let baconIpsum = "\n\nBacon ipsum dolor amet tenderloin buffalo leberkas capicola, biltong short loin prosciutto bacon beef pork loin shankle venison. Tri-tip boudin pork chop shank spare ribs prosciutto, porchetta frankfurter bresaola rump fatback. Salami ground round turducken ball tip t-bone alcatra ham venison short loin chicken boudin drumstick picanha tenderloin pork. Shank jowl buffalo turkey, ribeye brisket shoulder chislic pig porchetta ball tip pork chop bresaola frankfurter ham hock.";
 
 export const mockMovies = [
   {
