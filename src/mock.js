@@ -75,12 +75,6 @@ export const mockMovies = [
     description: "Big companies like Apple aren't invasive enough with their TV commercials, so we thought we'd get you to pay money to watch their ad." + baconIpsum,
     url: "https://picsum.photos/id/160/" + imgWidth + "/" + imgHeight,
   },
-  {
-    id: 12,
-    name: "Rocks",
-    description: "Rocks.  That's it...that's all you're gonna see in here." + baconIpsum,
-    url: "https://picsum.photos/id/168/" + imgWidth + "/" + imgHeight,
-  }
 ];
 
 export const mockLocations = [

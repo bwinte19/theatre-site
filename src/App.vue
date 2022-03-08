@@ -44,7 +44,6 @@ body {
   display: flex;
   background-color: #FFE900;
   padding: 20px;
-  margin-bottom: 50px;
 }
 
 #brand img {
@@ -102,7 +101,7 @@ footer {
   text-align: center;
   font-size: 20px;
   margin-top: 50px;
-  height: 100px;
+  height: 125px;
   flex-shrink: 0;
   background-color: #FFE900;
 }
