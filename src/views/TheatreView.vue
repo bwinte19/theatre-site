@@ -1,25 +1,25 @@
 <template>
   <div class="page">
-    <h1>Currently Showing at a See a Film near you:</h1>
-    <MovieList :movies="movies" />
+    <h1>Locations</h1>
+    <TheatreList :theatres="theatres" />
+    <br><br><br><br>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import MovieList from "../components/MovieList.vue"
-
+import TheatreList from '../components/TheatreList.vue'
 export default {
-  name: 'HomeView',
+  name: 'TheatreView',
   components: {
-    MovieList
+    TheatreList,
   },
   computed: {
-    movies() {
-      return this.$root.$data.movies;
-    },
+    theatres() {
+      return this.$root.$data.locations;
+    }
   }
 }
+
 </script>
 
 
@@ -30,9 +30,10 @@ export default {
   padding: 10px 20px;
   background-color: rgb(51, 51, 51);
 }
+
 h1 {
-  text-align: center;
   color: white;
+  text-align: center;
 }
 
 @media (min-width: 1015px) {

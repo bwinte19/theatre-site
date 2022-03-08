@@ -100,7 +100,6 @@ footer {
   justify-content: center;
   text-align: center;
   font-size: 20px;
-  margin-top: 50px;
   height: 125px;
   flex-shrink: 0;
   background-color: #FFE900;
