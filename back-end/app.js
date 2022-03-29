@@ -7,11 +7,25 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+const mongoose = require('mongoose');
 
-// Get a list of all of the items in the museum.
+mongoose.connect('mongodb://localhost:27017/theatre', {
+  useNewUrlParser: true
+});
+
+const movieSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  url: String,
+});
+
+const Movie = mongoose.model('Movie', movieSchema);
+
+// Get a list of all of the movies playing
 app.get('/api/movies', async (req, res) => {
   try {
-    res.send("This api end will get all the movies eventually");
+    let movies = await Movie.find();
+    res.send(movies);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -21,6 +35,12 @@ app.get('/api/movies', async (req, res) => {
 app.post('/api/addMovie', async(req, res) => {
   console.log("Adding movie " + req.body.title);
   try {
+    const movie = new Movie({
+      title: req.body.title,
+      description: req.body.description,
+      url: req.body.url,
+    });
+    await movie.save();
     res.send("Added movie " + req.body.title);
   } catch(error) {
     console.log(error);
