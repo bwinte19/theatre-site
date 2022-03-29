@@ -6,7 +6,7 @@
     <h2>&lt; Back</h2>
     </div>
     </router-link>
-    <h1>{{movie.name}}</h1>
+    <h1>{{movie.title}}</h1>
     <img :src=movie.url />
     <h2>Description:</h2>
     <p>{{movie.description}}</p>
@@ -16,7 +16,7 @@
 
 <script>
 // @ is an alias to /src
-
+import axios from 'axios';
 export default {
   name: 'MovieView',
   data() {
@@ -24,8 +24,9 @@ export default {
       movie: {}
     }
   },
-  created() {
-    this.movie = this.$root.$data.movies.find(movie => movie.id === parseInt(this.$route.params.id));
+  async created() {
+    let res = await axios.get('/api/movies/' + this.$route.params.id);
+    this.movie = res.data;
   }
 }
 </script>

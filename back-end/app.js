@@ -23,6 +23,7 @@ const Movie = mongoose.model('Movie', movieSchema);
 
 // Get a list of all of the movies playing
 app.get('/api/movies', async (req, res) => {
+  console.log("Getting all movies");
   try {
     let movies = await Movie.find();
     res.send(movies);
@@ -31,6 +32,17 @@ app.get('/api/movies', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+app.get('/api/movies/:id', async (req, res) => {
+  console.log("getting movie with id: " + req.params.id);
+  try {
+    let movie = await Movie.findOne({_id: req.params.id});
+    res.send(movie);
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+})
 
 app.post('/api/addMovie', async(req, res) => {
   console.log("Adding movie " + req.body.title);
