@@ -97,4 +97,15 @@ app.post('/api/addTheatre', async(req, res) => {
   }
 });
 
+app.delete('/api/theatre/:id', async(req, res) => {
+  console.log("deleting theatre " + req.params.id);
+  try {
+    await Theatre.deleteOne({_id: req.params.id});
+    res.send("Theatre successfully deleted");
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+})
+
 app.listen(3001, () => console.log('Server listening on port 3001!'));

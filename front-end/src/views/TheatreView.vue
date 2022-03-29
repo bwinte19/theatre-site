@@ -20,8 +20,14 @@ export default {
     }
   },
   async created() {
-    let res = await axios.get('/api/theatres');
-    this.theatres = res.data;
+    await this.updateTheatres();
+  },
+  methods: {
+    async updateTheatres() {
+      let res = await axios.get('/api/theatres');
+      this.theatres = res.data;
+      console.log("theatres updated");
+    }
   }
 }
 
