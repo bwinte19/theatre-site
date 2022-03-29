@@ -8,8 +8,13 @@
     </router-link>
     <h1>{{movie.title}}</h1>
     <img :src=movie.url />
+    <div class="votes">
+      <p><img class="icon" src="../assets/thumbsup.png" @click="upvote"/> <img class="icon" src="../assets/thumbsdown.png" @click="downvote"/></p>
+      <p>{{movie.upvotes}} &nbsp; | &nbsp; {{movie.downvotes}}</p>
+    </div>
     <h2>Description:</h2>
     <p>{{movie.description}}</p>
+    <button @click="deleteMovie">Remove Movie</button>
   </div>
 </template>
 
@@ -21,12 +26,30 @@ export default {
   name: 'MovieView',
   data() {
     return {
-      movie: {}
+      movie: {},
+      spaceBuffer: "   ",
     }
   },
   async created() {
-    let res = await axios.get('/api/movies/' + this.$route.params.id);
-    this.movie = res.data;
+    await this.getMovie();
+  },
+  methods: {
+    async getMovie() {
+      let res = await axios.get('/api/movies/' + this.$route.params.id);
+      this.movie = res.data;
+    },
+    async upvote() {
+      await axios.put('/api/movies/upvote/' + this.movie._id);
+      await this.getMovie();
+    },
+    async downvote() {
+      await axios.put('/api/movies/downvote/' + this.movie._id);
+      await this.getMovie();
+    },
+    async deleteMovie() {
+      await axios.delete('/api/movies/' + this.movie._id);
+      this.$router.push({name: 'home'});
+    }
   }
 }
 </script>
@@ -41,10 +64,37 @@ export default {
   background-color: rgb(51, 51, 51);
   color: white;
 }
+.votes {
+  text-align: center;
+  width: 400px;
+  margin: 10px auto;
+  height: 30px;
+}
+
+.icon {
+  width: 25px;
+  margin: 0px 10px 0px 10px;
+  padding: 0px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+button {
+  padding: 10px;
+}
+
+.votes p {
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
 h1 {
   text-align: center;
 }
 h2 {
+  text-align: left;
   color: white;
   margin: 0px;
 }

@@ -17,6 +17,8 @@ const movieSchema = new mongoose.Schema({
   title: String,
   description: String,
   url: String,
+  upvotes: Number,
+  downvotes: Number,
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
@@ -59,12 +61,51 @@ app.post('/api/addMovie', async(req, res) => {
       title: req.body.title,
       description: req.body.description,
       url: req.body.url,
+      upvotes: 0,
+      downvotes: 0,
     });
     await movie.save();
     res.send("Added movie " + req.body.title);
   } catch(error) {
     console.log(error);
     res.send("unable to add movie");
+    res.sendStatus(500);
+  }
+});
+
+app.put('/api/movies/upvote/:id', async(req, res) => {
+  console.log("upvoting movie id: " + req.params.id);
+  try {
+    let movie = await Movie.findOne({_id: req.params.id});
+    movie.upvotes++;
+    movie.save();
+    res.send("upvote noted");
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.put('/api/movies/downvote/:id', async(req, res) => {
+  console.log("downvoting movie id: " + req.params.id);
+  try {
+    let movie = await Movie.findOne({_id: req.params.id});
+    movie.downvotes++;
+    movie.save();
+    res.send("downvote noted");
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.delete('/api/movies/:id', async(req, res) => {
+  console.log("deleting movie " + req.params.id);
+  try {
+    await Movie.deleteOne({_id: req.params.id});
+    res.send("Movie successfully deleted");
+  } catch(error) {
+    console.log(error);
     res.sendStatus(500);
   }
 });
