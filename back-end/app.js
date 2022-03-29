@@ -18,4 +18,15 @@ app.get('/api/movies', async (req, res) => {
   }
 });
 
+app.post('/api/addMovie', async(req, res) => {
+  console.log("Adding movie " + req.body.title);
+  try {
+    res.send("Added movie " + req.body.title);
+  } catch(error) {
+    console.log(error);
+    res.send("unable to add movie");
+    res.sendStatus(500);
+  }
+});
+
 app.listen(3001, () => console.log('Server listening on port 3001!'));
