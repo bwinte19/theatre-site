@@ -8,17 +8,21 @@
 <script>
 // @ is an alias to /src
 import MovieList from "../components/MovieList.vue"
-
+import axios from 'axios';
 export default {
   name: 'HomeView',
   components: {
     MovieList
   },
-  computed: {
-    movies() {
-      return this.$root.$data.movies;
-    },
-  }
+  data() { 
+    return {
+      movies: [],
+    }
+  },
+  async created() {
+    let res = await axios.get('/api/movies');
+    this.movies = res.data;
+  },
 }
 </script>
 

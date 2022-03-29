@@ -1,10 +1,10 @@
 <template>
 <div class="wrapper">
   <div class="movies">
-    <router-link v-for="movie in movies" :key="movie.id" :to="'/movie/' + movie.id">
+    <router-link v-for="movie in movies" :key="movie._id" :to="'/movie/' + movie._id">
       <div class="movie">
         <img :src=movie.url />
-        <h1>{{movie.name}}</h1>
+        <h1>{{movie.title}}</h1>
       </div>
     </router-link>
   </div>
