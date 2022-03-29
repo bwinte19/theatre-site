@@ -21,6 +21,14 @@ const movieSchema = new mongoose.Schema({
 
 const Movie = mongoose.model('Movie', movieSchema);
 
+
+const theatreSchema = new mongoose.Schema({
+  name: String,
+  address: String,
+});
+
+const Theatre = mongoose.model('Theatre', theatreSchema);
+
 // Get a list of all of the movies playing
 app.get('/api/movies', async (req, res) => {
   console.log("Getting all movies");
@@ -57,6 +65,34 @@ app.post('/api/addMovie', async(req, res) => {
   } catch(error) {
     console.log(error);
     res.send("unable to add movie");
+    res.sendStatus(500);
+  }
+});
+
+
+app.get('/api/theatres', async (req, res) => {
+  console.log("Getting all theatres");
+  try {
+    let theatres = await Theatre.find();
+    res.send(theatres);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.post('/api/addTheatre', async(req, res) => {
+  console.log("Adding theatre " + req.body.name);
+  try {
+    const theatre = new Theatre({
+      name: req.body.name,
+      address: req.body.address,
+    });
+    await theatre.save();
+    res.send("Added theatre " + req.body.name);
+  } catch(error) {
+    console.log(error);
+    res.send("unable to add theatre");
     res.sendStatus(500);
   }
 });

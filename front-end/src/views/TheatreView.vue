@@ -8,15 +8,20 @@
 
 <script>
 import TheatreList from '../components/TheatreList.vue'
+import axios from 'axios';
 export default {
   name: 'TheatreView',
   components: {
     TheatreList,
   },
-  computed: {
-    theatres() {
-      return this.$root.$data.locations;
+  data() {
+    return {
+      theatres: [],
     }
+  },
+  async created() {
+    let res = await axios.get('/api/theatres');
+    this.theatres = res.data;
   }
 }
 

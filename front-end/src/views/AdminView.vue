@@ -1,20 +1,31 @@
 <template>
   <div class="page">
     <h1>Admin</h1>
+    <p>{{this.message}}</p>
     <h2>Add new Movie</h2>
     <div class="form">
         <p>Title</p>
-        <input v-model="title" placeholder="Title">
+        <input v-model="title" placeholder="Movie title">
         <p>Description:</p>
-        <textarea v-model="description"></textarea>
+        <textarea v-model="description" placeholder="Movie description"></textarea>
         <p></p>
         <p>Image URL</p>
         <input v-model="url" placeholder="Image URL">
         <p/>
-        <button @click="addMovie">Add</button>
-      </div>
-    <p>{{this.message}}</p>
-    <br><br><br><br>
+        <button @click="addMovie">Add Movie</button>
+    </div>
+    
+    <br>
+    <h2>Add new Theatre</h2>
+    <div class="form">
+        <p>Name</p>
+        <input v-model="theatreName" placeholder="Theatre name">
+        <p>Address:</p>
+        <textarea v-model="address" placeholder="Theatre Address"></textarea>
+        <p></p>
+        <button @click="addTheatre">Add Theatre</button>
+    </div>
+    <br><br><br>
   </div>
 </template>
 
@@ -30,6 +41,8 @@ export default {
       description: "",
       url: "",
       message: "",
+      theatreName: "",
+      address: "",
     }
   },
   computed: {
@@ -45,7 +58,18 @@ export default {
         url: this.url,
       });
       this.message = res.data;
-
+      this.title = "";
+      this.description = "";
+      this.url = "";
+    },
+    async addTheatre() {
+      let res = await axios.post('/api/addTheatre', {
+        name: this.theatreName,
+        address: this.address,
+      });
+      this.message = res.data;
+      this.theatreName = "";
+      this.address = "";
     }
   },
 }
@@ -77,6 +101,11 @@ p {
 textarea {
   width: 500px;
   height: 100px;
+}
+
+button {
+  width: 100px;
+  height: 30px;
 }
 
 @media (min-width: 1015px) {
