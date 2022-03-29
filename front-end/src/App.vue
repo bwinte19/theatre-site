@@ -21,6 +21,11 @@
               <p>Theatres</p>
             </div>
           </router-link>
+          <router-link to="/admin">
+            <div class="menu-item">
+              <p>Admin</p>
+            </div>
+          </router-link>
       </div>
       <router-view />
     </div>
